@@ -2,7 +2,7 @@ import tweepy
 import csv
 import pandas as pd
 import os
-import pickle
+# import pickle
 import time
 import datetime
 import json
@@ -20,14 +20,14 @@ main_directory = './data'
 excel_cols=["id","text","created_at","user_screenname",'geo', 'coordinates', 'place', 'timestamp_ms']
 tweet_per_file = 100
 
-def save_status(tweet):
-    file_path = main_directory + 'steaming/' + tweet.id_str + '_' + tag + '.pickle'
-    with open(file_path, 'wb') as f:
-        pickle.dump(tweet , f, pickle.HIGHEST_PROTOCOL)
+# def save_status(tweet):
+#     file_path = main_directory + 'steaming/' + tweet.id_str + '_' + tag + '.pickle'
+#     with open(file_path, 'wb') as f:
+#         pickle.dump(tweet , f, pickle.HIGHEST_PROTOCOL)
 
-def save_pickle(file_path, tweets):
-    with open(file_path, 'wb') as f:
-        pickle.dump(tweets , f, pickle.HIGHEST_PROTOCOL)
+# def save_pickle(file_path, tweets):
+#     with open(file_path, 'wb') as f:
+#         pickle.dump(tweets , f, pickle.HIGHEST_PROTOCOL)
 
 def save_excel(file_path, tweets):
     tweet_list = []
@@ -88,19 +88,19 @@ class CustomStreamListener(tweepy.StreamListener):
         #print('data collection progress #tweets  : ' , len(self.tweets) )
         if len(self.tweets) > tweet_per_file :
             directory = getpath()
-            pickle_directory = directory + 'pickle/'
+            # pickle_directory = directory + 'pickle/'
             excel_directory = directory + 'excel/'
-            if not os.path.exists(pickle_directory):
-                os.makedirs(pickle_directory)
+            # if not os.path.exists(pickle_directory):
+            #     os.makedirs(pickle_directory)
 
             if not os.path.exists(excel_directory):
                 os.makedirs(excel_directory)
 
             get_newhashtags(directory)
             currentDT = str(datetime.datetime.now()).replace('.','').replace(' ','').replace(':','')
-            pickle_file = pickle_directory + currentDT + '.pickle'
+            # pickle_file = pickle_directory + currentDT + '.pickle'
             excel_file = excel_directory  + currentDT + '.xlsx'
-            save_pickle(pickle_file, self.tweets)
+            # save_pickle(pickle_file, self.tweets)
             save_excel(excel_file, self.tweets)
             self.tweets = []
             print('save excel : ' , excel_file )
